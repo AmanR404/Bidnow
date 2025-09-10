@@ -5,7 +5,7 @@ import io from 'socket.io-client'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const socket = io("http://localhost:3000")
+const socket = io("https://bidnow-backend.vercel.app")
 
 function App() {
   let { loginWithRedirect, user, isAuthenticated } = useAuth0()
@@ -48,7 +48,7 @@ function App() {
     else {
       try {
         setIsDisabled(true)
-        let res = await fetch("http://localhost:3000/placebid", {
+        let res = await fetch("https://bidnow-backend.vercel.app/placebid", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user: user.name, bid: currentBid, product_name: title })
@@ -83,7 +83,7 @@ function App() {
   // Function to retrive last Bids
   const lastBidsFetcher = async () => {
     try {
-      let res = await fetch("http://localhost:3000/lastbids")
+      let res = await fetch("https://bidnow-backend.vercel.app/lastbids")
       let response = await res.json()
       setBids(response)
       setProducts(updatedProducts)
@@ -96,7 +96,7 @@ function App() {
   // Function to Check Highest Bids
   const highestBids = async () => {
     try {
-      let res = await fetch("http://localhost:3000/highestbid")
+      let res = await fetch("https://bidnow-backend.vercel.app/highestbid")
       let response = await res.json()
       setHighBids(response)
       setProducts(updatedHighBids)
@@ -124,7 +124,7 @@ function App() {
     const fetchUserBids = async()=>{
       if(user){
         try{
-          let res = await fetch(`http://localhost:3000/user-bids/${user.name}`)
+          let res = await fetch(`https://bidnow-backend.vercel.app/user-bids/${user.name}`)
           let bidProducts = await res.json()
 
           const bidsObj = bidProducts.reduce((acc, productName)=>{
