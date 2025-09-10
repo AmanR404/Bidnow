@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 const socket = io("https://bidnow-backend.vercel.app")
 
 function App() {
-  let { loginWithRedirect, user, isAuthenticated } = useAuth0()
+  let { loginWithRedirect, user, isAuthenticated, logout } = useAuth0()
 
   // States
   const [isDisabled, setIsDisabled] = useState(false)
@@ -213,7 +213,7 @@ function App() {
             <span className='text-white font-bold text-xl font-sans'>Bid Now</span>
           </div>
           <div className='flex items-center gap-2'>
-            <button className='text-[#1a4840] bg-white py-1.5 rounded-4xl px-5 cursor-pointer' onClick={() => loginWithRedirect()}>{isAuthenticated ? "Log Out" : "SignIn"}</button>
+            {isAuthenticated ? <button className='text-[#1a4840] bg-white py-1.5 rounded-4xl px-5 cursor-pointer' onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</button> : <button className='text-[#1a4840] bg-white py-1.5 rounded-4xl px-5 cursor-pointer' onClick={() => loginWithRedirect()}>SignIn</button>} 
             {isAuthenticated && <span>{`Hi ${user.name.split(" ")[0]}`}</span>}
           </div>
         </div>
