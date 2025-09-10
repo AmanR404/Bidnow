@@ -61,16 +61,6 @@ function App() {
         setUserBids(prev => ({...prev, [title] : true}))
         setTimeout(() => {
           setIsDisabled(false)
-              toast.success(`Bid Placed!`, {
-              position: "bottom-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark"
-            })
         }, 3000)
       }
       catch (error) {
